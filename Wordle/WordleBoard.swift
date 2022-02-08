@@ -15,6 +15,10 @@ struct WordleBoard: View {
 
     var body: some View {
         VStack {
+            Text("W O R D L E")
+                .foregroundColor(Color(.systemGray))
+                .font(.system(size: 50, weight: .bold, design: .rounded))
+                
             ZStack {
                 TextField("", text: $viewModel.string)
                     .keyboardType(.asciiCapable)
