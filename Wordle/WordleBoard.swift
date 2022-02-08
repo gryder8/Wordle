@@ -39,11 +39,25 @@ struct WordleBoard: View {
                     textFieldActive.toggle()
                 }
             }
-            Button("New Game") {
+//            Button("New Game") {
+//                withAnimation {
+//                    viewModel.newGame()
+//                }
+//            }
+            
+            Button(action: {
                 withAnimation {
                     viewModel.newGame()
                 }
-            }
+            }, label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 8)
+                        .foregroundColor(.blue)
+                        .frame(width: 120, height: 40, alignment: .center)
+                    Text("New Game")
+                        .foregroundColor(Color(.systemGray5))
+                }
+            })
             .padding(8)
         }
         .padding([.horizontal], 32)

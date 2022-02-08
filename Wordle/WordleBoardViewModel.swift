@@ -133,7 +133,7 @@ class WordleBoardViewModel: ObservableObject {
         evaluations[activeRow] = rowEvaluation
         checkWinOrLose(rowEvaluation)
         activeRow += 1
-        print("Guessed word:", word, "solution:", solution, "evaluation:", rowEvaluation)
+        print("Guessed word:", word, "\n solution:", solution, "\n evaluation:", rowEvaluation)
     }
 
     private func checkWinOrLose(_ rowEvaluation: [LetterEvaluation]) {
