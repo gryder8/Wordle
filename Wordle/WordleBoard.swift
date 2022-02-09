@@ -12,6 +12,7 @@ struct WordleBoard: View {
 
     @StateObject private var viewModel = WordleBoardViewModel()
     @FocusState private var textFieldActive: Bool
+    @State private var showingHint: Bool = false
 
     var body: some View {
         VStack {
@@ -49,20 +50,45 @@ struct WordleBoard: View {
 //                }
 //            }
             
-            Button(action: {
-                withAnimation {
-                    viewModel.newGame()
-                }
-            }, label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 8)
-                        .foregroundColor(.blue)
-                        .frame(width: 120, height: 40, alignment: .center)
-                    Text("New Game")
-                        .foregroundColor(Color(.systemGray5))
-                }
-            })
-            .padding(8)
+            VStack {
+                let hint = viewModel.hintProvider.hasHinted ? String(viewModel.hintProvider.hint).uppercased().separate(every: 1, with: " ") : " "
+                Text(hint)
+                    .bold()
+                    .transition(.slide)
+                    .id(hint)
+                    .font(.system(size: 24, design: .rounded))
+                
+                Button(action: {
+                    showingHint.toggle()
+                }, label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 8)
+                            .foregroundColor(Color(.systemGreen))
+                            .frame(width: 120, height: 40, alignment: .center)
+                        Text("Hint")
+                            .foregroundColor(Color(.systemGray5))
+                    }
+                })
+                    .alert(isPresented: $showingHint) {
+                        Alert(title: Text(viewModel.hintProvider.provideHint()), message: Text(""), dismissButton: .default(Text("Got it!")))
+                    }
+                .padding(8)
+                
+                Button(action: {
+                    withAnimation {
+                        viewModel.newGame()
+                    }
+                }, label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 8)
+                            .foregroundColor(.blue)
+                            .frame(width: 120, height: 40, alignment: .center)
+                        Text("New Game")
+                            .foregroundColor(Color(.systemGray5))
+                    }
+                })
+                .padding(8)
+            }
         }
         .padding([.horizontal], 32)
         .padding([.vertical], 24)

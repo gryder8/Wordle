@@ -29,7 +29,7 @@ class WordleBoardViewModel: ObservableObject {
     }
 
     var solution: String = ""
-    var hintProvider: HintProvider?
+    var hintProvider: HintProvider = HintProvider()
 
     private let allowedCharacters = CharacterSet.letters
     private var activeRow: Int = 0
