@@ -29,9 +29,17 @@ struct HintProvider {
     var hint: [Character] = Array.init(repeating: "_", count: 5)
     private var solution = ""
     private var hintedIndices: [Int] = [0,1,2,3,4]
-    private var hintsGiven = 0
-    private let maxHints = 3
+    var hintsGiven = 0
+    let maxHints = 3
     var hasHinted = false
+    
+    mutating func setIndiceOfHintWithChar(idx: Int, char: Character) {
+        hint[idx] = char
+    }
+    
+    mutating func removeIndiceFromHintableIndices(idx: Int) {
+        hintedIndices.removeAll(where: {$0 == idx})
+    }
     
     init(solution: String = "") {
         self.solution = solution
@@ -39,13 +47,15 @@ struct HintProvider {
     
     mutating func provideHint() -> String {
         if (hintsGiven >= maxHints) {
-            return String(hint).uppercased().separate(every: 1, with: " ")
+            return "Out of hints!"
         }
         let idx = hintedIndices.randomElement()
         hintedIndices.removeAll(where: {$0 == idx})
-        hint[idx!] = solution.charAt(at: idx!)
-        hintsGiven += 1
-        hasHinted = true
+        if (hintedIndices.count > 0) {
+            hint[idx!] = solution.charAt(at: idx!)
+            hintsGiven += 1
+            hasHinted = true
+        }
         return String(hint).uppercased().separate(every: 1, with: " ")
     }
     

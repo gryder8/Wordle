@@ -23,6 +23,7 @@ struct WordProvider {
     
     static func loadLocalJSONWords() -> [String] {
         if (hasLoadedFromJSON) {
+            print("Loaded from cached words")
             return loadedWords
         }
         
@@ -37,6 +38,7 @@ struct WordProvider {
         if let words = try? JSONDecoder().decode([String].self, from: data) {
             loadedWords = words
             hasLoadedFromJSON = true
+            print("Parsed words from JSON...")
             return loadedWords
         }
         return defaultWords

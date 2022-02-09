@@ -127,6 +127,8 @@ class WordleBoardViewModel: ObservableObject {
             .enumerated()
             .map { index, character in
                 if character == solution[index] {
+                    hintProvider.setIndiceOfHintWithChar(idx: index, char: character)
+                    hintProvider.removeIndiceFromHintableIndices(idx: index)
                     return .match
                 } else if solution.contains(character) {
                     return .included
@@ -137,7 +139,7 @@ class WordleBoardViewModel: ObservableObject {
         evaluations[activeRow] = rowEvaluation
         checkWinOrLose(rowEvaluation)
         activeRow += 1
-        print("Guessed word:", word, "\n solution:", solution, "\n evaluation:", rowEvaluation)
+        //print("Guessed:", word, "\nSolution:", String(solution))//, "\n evaluation:", rowEvaluation)
     }
 
     private func checkWinOrLose(_ rowEvaluation: [LetterEvaluation]) {
