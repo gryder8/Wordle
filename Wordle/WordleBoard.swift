@@ -93,7 +93,7 @@ struct WordleBoard: View {
                 }, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 8)
-                            .foregroundColor(.blue)
+                            .foregroundColor(Color(.systemBlue))
                             .frame(width: 120, height: 40, alignment: .center)
                         Text("New Game")
                             .foregroundColor(Color(.systemGray5))
