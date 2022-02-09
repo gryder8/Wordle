@@ -3,7 +3,7 @@
 //  Wordle
 //
 //  Created by Mischa Hildebrand on 17.01.22.
-//
+//  Modified by Gavin Ryder 02/08/22
 
 import Foundation
 
@@ -30,7 +30,7 @@ struct WordProvider {
           let url = Bundle.main.url(forResource: "wordle-words", withExtension: "json"),
           let data = try? Data(contentsOf: url)
         else {
-            print("Error parsing local JSON!")
+            print("Error configuring parsing for local JSON!")
             return defaultWords
         }
         

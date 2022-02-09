@@ -29,6 +29,7 @@ class WordleBoardViewModel: ObservableObject {
     }
 
     var solution: String = ""
+    var hintProvider: HintProvider?
 
     private let allowedCharacters = CharacterSet.letters
     private var activeRow: Int = 0
@@ -46,12 +47,15 @@ class WordleBoardViewModel: ObservableObject {
         )
         newGame()
     }
+    
+    
 
     func newGame() {
         activeRow = 0
         string = ""
         evaluations = evaluations.map { $0.map { _ in nil }}
         solution = WordProvider.generateWord()
+        hintProvider = HintProvider(solution: self.solution)
     }
 
     func validateString(_ newString: String, previousString: String) {

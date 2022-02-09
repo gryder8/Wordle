@@ -15,5 +15,6 @@ extension Color {
     static let letterBoxText = Color("LetterBoxText")
     static let included = Color("Included")
     static let matching = Color("Matching")
+    static let contrast = Color("TitleText")
     
 }
