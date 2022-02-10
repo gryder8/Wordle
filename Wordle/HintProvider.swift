@@ -55,8 +55,10 @@ struct HintProvider {
             hint[idx!] = solution.charAt(at: idx!)
             hintsGiven += 1
             hasHinted = true
+            return String(hint).uppercased().separate(every: 1, with: " ")
         }
-        return String(hint).uppercased().separate(every: 1, with: " ")
+        hintsGiven = maxHints
+        return "Too close for a hint!"
     }
     
     

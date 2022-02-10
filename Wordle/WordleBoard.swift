@@ -13,6 +13,7 @@ struct WordleBoard: View {
     @StateObject private var viewModel = WordleBoardViewModel()
     @FocusState private var textFieldActive: Bool
     @State private var showingHint: Bool = false
+    
 
     var body: some View {
         VStack {
@@ -36,6 +37,7 @@ struct WordleBoard: View {
                     .onChange(of: viewModel.string) { [oldString = viewModel.string] newString in
                         viewModel.validateString(newString, previousString: oldString)
                     }
+                    .disabled(viewModel.gameOver)
                 MatrixGrid(
                     width: viewModel.width,
                     height: viewModel.height,
@@ -108,12 +110,16 @@ struct WordleBoard: View {
         .background(Color.appBackground)
         .alert("You won! 🎉", isPresented: $viewModel.solved) {
             Button("OK", role: .none) {
+                textFieldActive = false
                 viewModel.solved = false
+                print("Game Over: \(viewModel.gameOver)")
             }
         }
-        .alert("You lost! 🥺", isPresented: $viewModel.lost) {
+        .alert("You lost! 🙁", isPresented: $viewModel.lost) {
             Button("OK", role: .none) {
+                textFieldActive = false
                 viewModel.lost = false
+                print("Game Over: \(viewModel.gameOver)")
             }
         } message: {
             Text("The word was:\n" + viewModel.solution.uppercased())
