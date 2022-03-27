@@ -117,7 +117,7 @@ struct WordleBoard: View {
                 Button("Settings") {
                     showingSettings.toggle()
                 }
-                .foregroundColor(.white)
+                .foregroundColor(Color(.systemGray5))
                 .buttonStyle(.borderedProminent)
                 .scaleEffect(1.05)
                 .padding(8)

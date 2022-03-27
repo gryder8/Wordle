@@ -145,7 +145,7 @@ class WordleBoardViewModel: ObservableObject {
                 .map { index, character in
                     if character == solution[index] {
                         hintProvider.setIndiceOfHintWithChar(idx: index, char: character)
-                        hintProvider.removeIndiceFromHintableIndices(idx: index)
+                        hintProvider.removeIndiceFromHintableIndices(index)
                         return .match
                     } else if solution.contains(character) {
                         return .included
