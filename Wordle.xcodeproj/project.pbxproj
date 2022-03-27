@@ -68,15 +68,10 @@
 			isa = PBXGroup;
 			children = (
 				34F20A22279204B300D62EA9 /* WordleApp.swift */,
-				34F20A24279204B300D62EA9 /* WordleBoard.swift */,
-				865B2E8727B321560099591A /* wordle-words.json */,
-				3455E09F2796E1A40015DA2D /* MatrixGrid.swift */,
-				A1FB90FC279629C600442D90 /* Shape+Extensions.swift */,
-				3455E09D2795DA2A0015DA2D /* WordProvider.swift */,
-				865B2E8927B35BE90099591A /* HintProvider.swift */,
-				A1FB90DD2793953500442D90 /* LetterBox.swift */,
-				A1FB90FA279620D000442D90 /* Colors.swift */,
-				34F20A302792126000D62EA9 /* WordleBoardViewModel.swift */,
+				86D7487827F1239C004FDDE2 /* Utils and Data */,
+				86D7487A27F123DA004FDDE2 /* Views */,
+				86D7487927F123C1004FDDE2 /* Providers */,
+				86D7487B27F123F6004FDDE2 /* Model */,
 				34F20A26279204B400D62EA9 /* Assets.xcassets */,
 				34F20A28279204B400D62EA9 /* Preview Content */,
 			);
@@ -89,6 +84,43 @@
 				34F20A29279204B400D62EA9 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		86D7487827F1239C004FDDE2 /* Utils and Data */ = {
+			isa = PBXGroup;
+			children = (
+				A1FB90FC279629C600442D90 /* Shape+Extensions.swift */,
+				865B2E8727B321560099591A /* wordle-words.json */,
+				A1FB90FA279620D000442D90 /* Colors.swift */,
+			);
+			path = "Utils and Data";
+			sourceTree = "<group>";
+		};
+		86D7487927F123C1004FDDE2 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				3455E09D2795DA2A0015DA2D /* WordProvider.swift */,
+				865B2E8927B35BE90099591A /* HintProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		86D7487A27F123DA004FDDE2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				34F20A24279204B300D62EA9 /* WordleBoard.swift */,
+				3455E09F2796E1A40015DA2D /* MatrixGrid.swift */,
+				A1FB90DD2793953500442D90 /* LetterBox.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		86D7487B27F123F6004FDDE2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				34F20A302792126000D62EA9 /* WordleBoardViewModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
