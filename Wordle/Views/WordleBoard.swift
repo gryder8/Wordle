@@ -13,11 +13,22 @@ struct WordleBoard: View {
     @StateObject private var viewModel = WordleBoardViewModel()
     @FocusState private var textFieldActive: Bool
     @State private var showingHint: Bool = false
-    
+    @State private var hintsEnabled: Bool = true
+    @State private var showingSettings: Bool = false
+    //@Environment(\.colorScheme) var systemAppearence
 
     var body: some View {
         VStack {
-            
+//            HStack {
+//                Button {
+//                    showingSettings.toggle()
+//                } label: {
+//                    Image(systemName: "gearshape")
+//                        .font(.system(size: 32))
+//                        .foregroundColor(.gray)
+//                }
+//                Spacer()
+//            }
             VStack {
                 Text("W O R D L E")
                     .foregroundColor(Color(.systemGray))
@@ -53,11 +64,7 @@ struct WordleBoard: View {
                     textFieldActive.toggle()
                 }
             }
-//            Button("New Game") {
-//                withAnimation {
-//                    viewModel.newGame()
-//                }
-//            }
+
             
             VStack {
                 let hint = viewModel.hintProvider.hasHinted ? String(viewModel.hintProvider.hint).uppercased().separate(every: 1, with: " ") : " "
@@ -80,6 +87,8 @@ struct WordleBoard: View {
                             .font(.system(size: 18, design: .rounded))
                     }
                 })
+                .opacity(hintsEnabled ? 1 : 0.5)
+                .disabled(!hintsEnabled)
                     .alert(isPresented: $showingHint) {
                         let hint = viewModel.hintProvider.provideHint()
                         let hintsRemaining = viewModel.hintProvider.maxHints - viewModel.hintProvider.hintsGiven
@@ -95,7 +104,7 @@ struct WordleBoard: View {
                 }, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 8)
-                            .foregroundColor(Color(.systemBlue))
+                            .foregroundColor(Color(.systemGreen))
                             .frame(width: 120, height: 40, alignment: .center)
                         Text("New Game")
                             .foregroundColor(Color(.systemGray5))
@@ -103,11 +112,24 @@ struct WordleBoard: View {
                     }
                 })
                 .padding(8)
+                
+                
+                Button("Settings") {
+                    showingSettings.toggle()
+                }
+                .foregroundColor(.white)
+                .buttonStyle(.borderedProminent)
+                .scaleEffect(1.05)
+                .padding(8)
             }
         }
         .padding([.horizontal], 32)
-        .padding([.vertical], 24)
+        .padding([.vertical], 34)
         .background(Color.appBackground)
+        
+        .popover(isPresented: $showingSettings) { SettingsView(hintsEnabled: $hintsEnabled)
+        }
+        
         .alert("You won! 🎉", isPresented: $viewModel.solved) {
             Button("OK", role: .none) {
                 textFieldActive = false
